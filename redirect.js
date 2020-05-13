@@ -9,7 +9,10 @@ const pathRegexp = new RegExp('^http(s)?\:\/\/([a-z].)?aliexpress\.com\/ru\//', 
 function globalURL(requestDetails) {
     var requestUrl = requestDetails.url;
     if (storeRegexp.test(requestUrl)) {
-        return;
+        let globalSite = requestUrl.replace(/aliexpress\.ru/g, "aliexpress.com");
+        return {
+            redirectUrl: globalSite
+        };
     } else if (domainRegexp.test(requestUrl)) {
         let globalSite = requestUrl.replace(/aliexpress\.ru/g, "aliexpress.com");
         return {
